@@ -16,13 +16,12 @@ import javax.xml.bind.annotation.*;
 @XmlSeeAlso(User.class)
 public class User {
     @XmlElement(name = "id")
-    private Long id;
-    @XmlElement(name = "id")
+    private String id;
+    @XmlElement(name = "name")
     private String name;
-    @XmlElement(name = "id")
+    @XmlElement(name = "surname")
     private String surname;
-    @XmlElement(name = "id")
+    @XmlElement(name = "age")
     private Integer age;
-    @XmlElement(name = "id")
-    private Status status;
+    private Address address;
 }
