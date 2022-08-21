@@ -10,4 +10,8 @@ public interface UserService {
     ResponseModel<List<UserResponse>> list();
 
     ResponseModel<UserResponse> save(UserRequest userRequest);
+
+    ResponseModel<UserResponse> update(String id, UserRequest userRequest);
+
+    ResponseModel<UserResponse> delete(String id);
 }

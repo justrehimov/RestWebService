@@ -10,10 +10,11 @@ import java.util.List;
 
 public interface AddressService {
 
-    Address getById(String id);
+    Address getById(String id) throws Exception;
 
-    Address getByUserId(String id);
-    ResponseModel<List<AddressResponse>> list();
+    Address getByUserId(String id) throws Exception;
 
-    ResponseModel<AddressResponse> save(AddressRequest addressRequest);
+    Address update(String userId,Address address) throws Exception;
+
+    Address delete(String userId) throws Exception;
 }

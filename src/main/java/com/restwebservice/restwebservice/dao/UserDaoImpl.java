@@ -21,7 +21,7 @@ public class UserDaoImpl implements UserDao{
     private final AddressDao addressDao = new AddressDaoImpl();
 
     @Override
-    public List<User> list() {
+    public List<User> list() throws Exception{
         List<UserAddressModel> addressModels =
                 jdbcTemplate.query("select * from users",new BeanPropertyRowMapper<>(UserAddressModel.class));
         List<User> userList = new ArrayList<>();
@@ -38,7 +38,7 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public User save(User user) {
+    public User save(User user) throws Exception{
         String id = UUID.randomUUID().toString();
         Address address = addressDao.save(user.getAddress());
         jdbcTemplate.update("insert into users(id,name,surname,age,address_id) values(?,?,?,?,?)",
@@ -47,10 +47,36 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public User getById(String id) {
+    public User getById(String id) throws Exception{
         User user = jdbcTemplate.queryForObject("select * from users where id = ?",new Object[]{id},new BeanPropertyRowMapper<>(User.class));
+        if(user==null){
+            throw new IllegalArgumentException("User not found");
+        }
         Address address = addressService.getByUserId(id);
         user.setAddress(address);
         return user;
+    }
+
+    @Override
+    public User update(String id, User user) throws Exception{
+        User savedUser = getById(id);
+        savedUser.setName(user.getName());
+        savedUser.setSurname(user.getSurname());
+        savedUser.setAge(user.getAge());
+        jdbcTemplate.update("update users set name=?,surname=?,age=? where id=?",
+                new Object[]{savedUser.getName(),savedUser.getSurname(),savedUser.getAge(),id});
+        addressService.update(id,user.getAddress());
+        return getById(id);
+    }
+
+    @Override
+    public User delete(String id) throws Exception{
+        User user = getById(id);
+         if(user==null){
+            throw new IllegalArgumentException("User not found");
+         }
+         jdbcTemplate.update("delete from users where id = ?",new Object[]{id});
+         user.setAddress(addressService.delete(id));
+         return user;
     }
 }

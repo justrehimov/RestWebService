@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @Data
 public class UserResponse {
+    private String id;
     private String name;
     private String surname;
     private int age;

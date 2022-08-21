@@ -28,4 +28,20 @@ public class UserController {
         return userService.save(userRequest);
     }
 
+
+    @PUT
+    @Path("/{id}")
+    @Produces("application/json")
+    @Consumes("application/json")
+    public ResponseModel<UserResponse> update(@PathParam("id") String id,UserRequest userRequest){
+        return userService.update(id, userRequest);
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Produces("application/json")
+    public ResponseModel<UserResponse> delete(@PathParam("id") String id){
+        return userService.delete(id);
+    }
+
 }

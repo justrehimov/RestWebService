@@ -13,4 +13,11 @@ public class Status {
         status.setCode(200);
         return status;
     }
+
+    public static Status createStatus(String message, int code){
+        Status status = new Status();
+        status.setMessage(message);
+        status.setCode(code);
+        return status;
+    }
 }

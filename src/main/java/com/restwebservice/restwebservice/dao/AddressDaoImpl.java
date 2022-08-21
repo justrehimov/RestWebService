@@ -36,4 +36,25 @@ public class AddressDaoImpl implements AddressDao{
                 new Object[]{id},new BeanPropertyRowMapper<>(Address.class));
     }
 
+    @Override
+    public Address update(String userId, Address address) {
+        Address savedAddress = getByUserId(userId);
+        savedAddress.setAddress(address.getAddress());
+        savedAddress.setZipcode(address.getZipcode());
+        jdbcTemplate.update("update address set address=?,zipcode=? where id=?",
+                new Object[]{savedAddress.getAddress(),savedAddress.getZipcode(),savedAddress.getId()});
+        return getByUserId(userId);
+    }
+
+    @Override
+    public Address delete(String userId) {
+        Address address = getById(userId);
+        if(address!=null){
+            jdbcTemplate.update("delete from address where id = ?", new Object[]{address.getId()});
+        }else{
+            throw new IllegalArgumentException("Address not found");
+        }
+        return address;
+    }
+
 }
