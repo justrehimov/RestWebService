@@ -8,6 +8,7 @@ import com.restwebservice.restwebservice.dto.response.ResponseModel;
 import com.restwebservice.restwebservice.dto.response.UserResponse;
 import com.restwebservice.restwebservice.exceptions.Status;
 import com.restwebservice.restwebservice.model.Address;
+import com.restwebservice.restwebservice.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class AddressServiceImpl implements AddressService{
     }
 
     @Override
-    public Address delete(String userId) throws Exception{
-        return addressDao.delete(userId);
+    public Address delete(String userId ,User user) throws Exception{
+        return addressDao.delete(userId,user);
     }
 }

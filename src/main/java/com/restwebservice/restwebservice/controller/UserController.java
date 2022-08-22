@@ -41,6 +41,7 @@ public class UserController {
     @Path("/{id}")
     @Produces("application/json")
     public ResponseModel<UserResponse> delete(@PathParam("id") String id){
+
         return userService.delete(id);
     }
 

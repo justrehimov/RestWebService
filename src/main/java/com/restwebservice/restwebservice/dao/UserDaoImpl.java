@@ -76,7 +76,7 @@ public class UserDaoImpl implements UserDao{
             throw new IllegalArgumentException("User not found");
          }
          jdbcTemplate.update("delete from users where id = ?",new Object[]{id});
-         user.setAddress(addressService.delete(id));
+         user.setAddress(addressService.delete(id,user));
          return user;
     }
 }
