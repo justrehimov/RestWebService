@@ -2,6 +2,7 @@ package com.restwebservice.restwebservice.dao;
 
 import com.restwebservice.restwebservice.db.DbManager;
 import com.restwebservice.restwebservice.model.Address;
+import com.restwebservice.restwebservice.model.User;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -46,9 +47,10 @@ public class AddressDaoImpl implements AddressDao{
         return getByUserId(userId);
     }
 
+    //salammmmmm
     @Override
-    public Address delete(String userId) {
-        Address address = getById(userId);
+    public Address delete(String userId, User user) {
+        Address address = getById(user.getAddress().getId());
         if(address!=null){
             jdbcTemplate.update("delete from address where id = ?", new Object[]{address.getId()});
         }else{
