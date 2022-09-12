@@ -11,7 +11,7 @@ public class DbManager {
     public static DataSource getDataSource(){
         try{
             Context ctx = new InitialContext();
-            DataSource dataSource = (DataSource) ctx.lookup("java:comp/env/jdbc/mysql");
+            DataSource dataSource = (DataSource) ctx.lookup("java:comp/env/jdbc/postgresql");
             return dataSource;
         } catch (NamingException e) {
             return null;

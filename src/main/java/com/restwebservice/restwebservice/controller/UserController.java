@@ -15,7 +15,7 @@ public class UserController {
     private final UserService userService = new UserServiceImpl();
     @GET
     @Path("/list")
-    @Produces("application/json")
+    @Produces({"application/json"})
     public ResponseModel<List<UserResponse>> list(){
         return userService.list();
     }
